@@ -18,12 +18,60 @@ module.exports = () => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
-      
+      // HTML loader to create index
+      new HtmlWebpackPlugin({
+        template: "./index.html",
+        title: "JATE - Just Another Text Editor",
+      }),
+      // adding Service Workers from src-sw.js
+      new InjectManifest({
+        swSrc: "./src-sw.js",
+        swDest: "src-sw.js",
+      }),
+      // adding manifest
+      new WebpackPwaManifest({
+        fingerprints: false,
+        inject: true,
+        name: "Just Another Text Editor",
+        short_name: "JATE",
+        description: "Text Editor with offline capabilities using IndexedDB",
+        background_color: "#225ca3",
+        theme_color: "#225ca3",
+        start_url: "/",
+        publicPath: "/",
+        icons: [
+          {
+            src: path.resolve("src/images/logo.png"),
+            sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
+            destination: path.join("assets", "icons"),
+          },
+        ],
+      }),
     ],
 
     module: {
+      
       rules: [
-        
+        // add style loader
+        {
+          test: /\.css$/,
+          use: ["style-loader", "css-loader"],
+        },
+        // add babel
+        {
+          test: /\.m?js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "babel-loader",
+            options: {
+              presets: ["@babel/preset-env"],
+              plugins: [
+                "@babel/plugin-proposal-object-rest-spread",
+                "@babel/transform-runtime",
+              ],
+            },
+          }
+        }
       ],
     },
   };
