@@ -11,8 +11,8 @@
     "install": "cd client && npm install",
     "client": "cd client && npm start"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["PWA"],
+  "author": "Hai Duong",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
