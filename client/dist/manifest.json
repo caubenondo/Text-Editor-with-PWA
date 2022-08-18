@@ -41,7 +41,7 @@
   "orientation": "portrait",
   "display": "standalone",
   "start_url": "/",
-  "description": "Text Editor with offline capabilities using IndexedDB",
+  "description": "Text Editor with offline capabilities using IndexedDB and Service Worker",
   "background_color": "#225ca3",
   "theme_color": "#225ca3"
 }
